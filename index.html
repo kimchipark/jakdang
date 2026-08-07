@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>리스닝 큐레이션 팝업 in 작당</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>큐레이션 목록<span class="dot"> ●</span></span>
+      <span>2026 — 컬렉션</span>
+    </div>
+    <div class="title-block">
+      <h1 class="project-name">리스닝 큐레이션 팝업 in 작당</h1>
+      <p class="lede">이미지를 눌러 각 기록의 <em>세부 페이지</em>로 이동하세요. 콘텐츠는 언제든 교체할 수 있습니다.</p>
+    </div>
+  </header>
+
+  <main class="gallery" id="gallery" aria-label="콘텐츠 목록"></main>
+
+  <footer class="colophon">
+    <span>ARCHIVE — 반응형 갤러리</span>
+    <span>이미지 클릭 → 세부 페이지</span>
+  </footer>
+
+<script src="data.js"></script>
+<script>
+  const gallery = document.getElementById('gallery');
+
+  ITEMS.forEach((item, i) => {
+    const card = document.createElement('a');
+    card.className = 'card';
+    card.href = `post.html?id=${i}`;
+    card.setAttribute('aria-label', `${item.title} — 자세히 보기`);
+    card.innerHTML = `
+      <div class="cover">
+        <div class="art" style="${coverStyle(item, 'thumb')}"></div>
+        <span class="idx">${pad(i)}</span>
+        <span class="view">자세히 보기</span>
+      </div>
+      <div>
+        <div class="meta-row"><span class="tag">${item.tag}</span><span>${item.meta}</span></div>
+        <h2><span class="h2-underline">${item.title}</span></h2>
+      </div>`;
+    gallery.appendChild(card);
+  });
+</script>
+</body>
+</html>

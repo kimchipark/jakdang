@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>큐레이션 — 세부 페이지</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="detail-bar">
+    <!--<a class="crumb" href="index.html">← 큐레이션 목록</a>-->
+    <div class="detail-nav">
+      <!--
+      <a class="btn" id="prev" href="#">← 이전</a>
+      <a class="btn" id="next" href="#">다음 →</a>
+      -->
+    </div>
+  </div>
+
+  <main class="post" id="post">
+    <div class="detail-index">
+      <span id="d-idx">01</span>
+      <span class="tag" id="d-tag">CATEGORY</span>
+      <span id="d-meta">META</span>
+    </div>
+    <h1 id="d-title">제목</h1>
+
+    <!-- 긴 이미지가 잘리지 않고 통째로 들어가는 자리 -->
+    <div class="post-media" id="d-media"></div>
+
+    <div class="post-body" id="d-body"></div>
+
+    <div class="post-foot">
+      <!--
+      <a class="btn" href="index.html">← 목록으로</a>
+      <a class="btn primary" id="foot-next" href="#">다음 기록 →</a>
+      -->
+    </div>
+  </main>
+
+<script src="data.js"></script>
+<script>
+  // 주소의 ?id=번호 를 읽어 어떤 글을 보여줄지 결정
+  const params = new URLSearchParams(location.search);
+  let id = parseInt(params.get('id'), 10);
+  if (isNaN(id) || id < 0 || id >= ITEMS.length) id = 0;
+
+  const item = ITEMS[id];
+
+  document.getElementById('d-idx').textContent  = pad(id) + ' / ' + pad(ITEMS.length - 1);
+  document.getElementById('d-tag').textContent  = item.tag;
+  document.getElementById('d-meta').textContent = item.meta;
+  document.getElementById('d-title').textContent = item.title;
+  document.title = 'ARCHIVE — ' + item.title;
+
+  // 이미지가 있으면 전체 높이로 통째로, 없으면 색상 커버(16:9)로 표시
+  const media = document.getElementById('d-media');
+  if (item.cover && item.cover.img) {
+    const img = document.createElement('img');
+    img.src = item.cover.img;
+    img.alt = item.title;
+    img.className = 'full-img';
+    media.appendChild(img);
+  } else {
+    media.className = 'post-media gradient';
+    media.style.cssText = coverStyle(item);
+  }
+
+  // 본문 (비어 있으면 아무것도 표시하지 않음)
+  const body = document.getElementById('d-body');
+  body.innerHTML = (item.body || []).map(p => `<p>${p}</p>`).join('');
+
+  // 이전 / 다음 링크 연결
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const footNext = document.getElementById('foot-next');
+
+  if (id > 0) { prev.href = `post.html?id=${id - 1}`; }
+  else { prev.classList.add('is-disabled'); prev.removeAttribute('href'); }
+
+  if (id < ITEMS.length - 1) {
+    next.href = `post.html?id=${id + 1}`;
+    footNext.href = `post.html?id=${id + 1}`;
+  } else {
+    next.classList.add('is-disabled'); next.removeAttribute('href');
+    footNext.style.display = 'none';
+  }
+
+  // 키보드 좌우 화살표로 이동
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft' && id > 0) location.href = `post.html?id=${id - 1}`;
+    if (e.key === 'ArrowRight' && id < ITEMS.length - 1) location.href = `post.html?id=${id + 1}`;
+  });
+</script>
+</body>
+</html>
