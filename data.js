@@ -96,7 +96,7 @@ const ITEMS = [
     body:[]
   },
   {
-    title:"큐레이터 오살",
+    title:"큐레이터 영상 중독 유치원 교사",
     tag:"PROFILE",
     meta:"2026",
     hue:[330, 70],
@@ -105,7 +105,7 @@ const ITEMS = [
     body:[]
   },
   {
-    title:"큐레이터 우동맨",
+    title:"큐레이터 오살",
     tag:"PROFILE",
     meta:"2026",
     hue:[330, 70],
@@ -114,7 +114,7 @@ const ITEMS = [
     body:[]
   },
   {
-    title:"큐레이터 영상 중독 유치원 교사",
+    title:"큐레이터 우동맨",
     tag:"PROFILE",
     meta:"2026",
     hue:[330, 70],
@@ -168,7 +168,7 @@ const ITEMS = [
     body:[]
   },
   {
-    title:"큐레이터 하우",
+    title:"큐레이터 키드문",
     tag:"PROFILE",
     meta:"2026",
     hue:[330, 70],
@@ -177,7 +177,7 @@ const ITEMS = [
     body:[]
   },
   {
-    title:"큐레이터 훌리둘리",
+    title:"큐레이터 하우",
     tag:"PROFILE",
     meta:"2026",
     hue:[330, 70],
@@ -186,7 +186,7 @@ const ITEMS = [
     body:[]
   },
   {
-    title:"큐레이터 하현호",
+    title:"큐레이터 훌리둘리",
     tag:"PROFILE",
     meta:"2026",
     hue:[330, 70],
