@@ -177,7 +177,7 @@ const ITEMS = [
     body:[]
   },
   {
-    title:"큐레이터 하우",
+    title:"큐레이터 바우",
     tag:"PROFILE",
     meta:"2026",
     hue:[330, 70],
